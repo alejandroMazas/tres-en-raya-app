@@ -7,7 +7,7 @@ const initialGameBoard = [
 ];
 
 
-export default function GameBoard() {
+export default function GameBoard({ onSelectSquare, activePlayerSymbol }) {
 
     const [gameBoard, setGameBoard] = useState(initialGameBoard)
 
@@ -15,9 +15,11 @@ export default function GameBoard() {
         setGameBoard((prevGameBoard) => {
             const updatedBoard = [...prevGameBoard.map(innerArray => [...innerArray])];
             //Es una buena práctica hacer una copia del array mediante el spread operator para evitar mutaciones directas al actualizar el estado
-            updatedBoard[rowIndex][colIndex] = 'X'; // Aquí se puede cambiar 'X' por el símbolo del jugador actual
+            updatedBoard[rowIndex][colIndex] = activePlayerSymbol; // Aquí se puede cambiar 'X' por el símbolo del jugador actualutilizando la posición del botón que haya sido pulsado en el tablero de juego.
             return updatedBoard;
         })
+
+        onSelectSquare()
     }
 
     return (
